@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.buschmais.jqassistant.plugin</groupId>
-    <artifactId>jqa-ejb3-plugin</artifactId>
+    <artifactId>ejb3</artifactId>
 
     <build>
         <plugins>

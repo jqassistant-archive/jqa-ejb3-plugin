@@ -1,0 +1,14 @@
+= jQAssistant EJB 3 Plugin
+
+This is the EJB 3 Plugin of https://www.jqassistant.org[jQAssistant^].
+It enables jQAssistant to scan and to analyze EJB 3 related
+artifacts like:
+
+- remote beans
+- local beans
+- stateful session beans
+- singleton beans
+- message driven beans
+- ...
+
+For more information on jQAssistant see https://www.jqassistant.org[^].

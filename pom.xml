@@ -10,6 +10,7 @@
 
     <groupId>com.buschmais.jqassistant.plugin</groupId>
     <artifactId>ejb3</artifactId>
+    <name>jQAssistant EJB 3 Plugin</name>
 
     <build>
         <plugins>

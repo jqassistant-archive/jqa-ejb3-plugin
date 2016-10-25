@@ -32,6 +32,13 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:git:git@github.com:buschmais/jqa-ejb3-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:buschmais/jqa-ejb3-plugin.git</developerConnection>
+        <url>https://github.com/buschmais/jqa-ejb3-plugin</url>
+    </scm>
+
+
     <properties>
         <jqa-cdi-plugin.version>1.2-SNAPSHOT</jqa-cdi-plugin.version>
         <jqa-java-plugin.version>1.2-SNAPSHOT</jqa-java-plugin.version>

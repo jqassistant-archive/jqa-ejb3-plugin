@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import java.io.IOException;
 
 import com.buschmais.jqassistant.core.analysis.api.rule.NoGroupException;
+import com.buschmais.jqassistant.core.rule.api.executor.RuleExecutorException;
 import org.junit.Test;
 
 import com.buschmais.jqassistant.core.analysis.api.AnalysisException;
@@ -130,7 +131,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void enterpriseJavaBean() throws IOException, AnalysisException, NoGroupException {
+    public void enterpriseJavaBean() throws IOException, RuleExecutorException, NoGroupException {
         scanClasses(StatelessLocalBean.class, StatelessRemoteBean.class, StatefulBean.class, MessageDrivenBean.class);
         executeGroup("ejb3:EJB");
         store.beginTransaction();

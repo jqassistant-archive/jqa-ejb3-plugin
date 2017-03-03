@@ -6,12 +6,11 @@ import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 
-import com.buschmais.jqassistant.core.analysis.api.rule.NoGroupException;
-import com.buschmais.jqassistant.core.rule.api.executor.RuleExecutorException;
 import org.junit.Test;
 
-import com.buschmais.jqassistant.core.analysis.api.AnalysisException;
 import com.buschmais.jqassistant.core.analysis.api.Result;
+import com.buschmais.jqassistant.core.analysis.api.rule.NoGroupException;
+import com.buschmais.jqassistant.core.rule.api.executor.RuleExecutorException;
 import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.*;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
@@ -24,8 +23,6 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      * Verifies the concept "ejb3:StatelessSessionBean".
      * 
      * @throws java.io.IOException
-     *             If the test fails.
-     * @throws com.buschmais.jqassistant.core.analysis.api.AnalysisException
      *             If the test fails.
      */
     @Test
@@ -42,8 +39,6 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      * 
      * @throws java.io.IOException
      *             If the test fails.
-     * @throws com.buschmais.jqassistant.core.analysis.api.AnalysisException
-     *             If the test fails.
      */
     @Test
     public void statefulSessionBean() throws Exception {
@@ -58,8 +53,6 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      * Verifies the concept "ejb3:SingletonBean".
      * 
      * @throws java.io.IOException
-     *             If the test fails.
-     * @throws com.buschmais.jqassistant.core.analysis.api.AnalysisException
      *             If the test fails.
      */
     @Test
@@ -76,8 +69,6 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      * 
      * @throws java.io.IOException
      *             If the test fails.
-     * @throws com.buschmais.jqassistant.core.analysis.api.AnalysisException
-     *             If the test fails.
      */
     @Test
     public void messageDrivenBean() throws Exception {
@@ -92,8 +83,6 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      * Verifies the concept "ejb3:Local".
      * 
      * @throws java.io.IOException
-     *             If the test fails.
-     * @throws com.buschmais.jqassistant.core.analysis.api.AnalysisException
      *             If the test fails.
      */
     @Test
@@ -110,8 +99,6 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      * 
      * @throws java.io.IOException
      *             If the test fails.
-     * @throws com.buschmais.jqassistant.core.analysis.api.AnalysisException
-     *             If the test fails.
      */
     @Test
     public void remoteSessionBean() throws Exception {
@@ -126,8 +113,6 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      * Verifies the analysis group "ejb3:EnterpriseJavaBean".
      * 
      * @throws java.io.IOException
-     *             If the test fails.
-     * @throws com.buschmais.jqassistant.core.analysis.api.AnalysisException
      *             If the test fails.
      */
     @Test

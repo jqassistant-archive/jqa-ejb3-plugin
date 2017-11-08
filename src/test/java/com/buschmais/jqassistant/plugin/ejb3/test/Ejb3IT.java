@@ -9,8 +9,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.buschmais.jqassistant.core.analysis.api.Result;
-import com.buschmais.jqassistant.core.analysis.api.rule.NoGroupException;
-import com.buschmais.jqassistant.core.rule.api.executor.RuleExecutorException;
+import com.buschmais.jqassistant.core.analysis.api.rule.RuleException;
 import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.*;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
@@ -21,7 +20,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
 
     /**
      * Verifies the concept "ejb3:StatelessSessionBean".
-     * 
+     *
      * @throws java.io.IOException
      *             If the test fails.
      */
@@ -36,7 +35,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
 
     /**
      * Verifies the concept "ejb3:StatefulSessionBean".
-     * 
+     *
      * @throws java.io.IOException
      *             If the test fails.
      */
@@ -51,7 +50,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
 
     /**
      * Verifies the concept "ejb3:SingletonBean".
-     * 
+     *
      * @throws java.io.IOException
      *             If the test fails.
      */
@@ -66,7 +65,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
 
     /**
      * Verifies the concept "ejb3:MessageDrivenBean".
-     * 
+     *
      * @throws java.io.IOException
      *             If the test fails.
      */
@@ -81,7 +80,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
 
     /**
      * Verifies the concept "ejb3:Local".
-     * 
+     *
      * @throws java.io.IOException
      *             If the test fails.
      */
@@ -96,7 +95,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
 
     /**
      * Verifies the concept "ejb3:Remote".
-     * 
+     *
      * @throws java.io.IOException
      *             If the test fails.
      */
@@ -111,12 +110,12 @@ public class Ejb3IT extends AbstractJavaPluginIT {
 
     /**
      * Verifies the analysis group "ejb3:EnterpriseJavaBean".
-     * 
+     *
      * @throws java.io.IOException
      *             If the test fails.
      */
     @Test
-    public void enterpriseJavaBean() throws IOException, RuleExecutorException, NoGroupException {
+    public void enterpriseJavaBean() throws IOException, RuleException {
         scanClasses(StatelessLocalBean.class, StatelessRemoteBean.class, StatefulBean.class, MessageDrivenBean.class);
         executeGroup("ejb3:EJB");
         store.beginTransaction();

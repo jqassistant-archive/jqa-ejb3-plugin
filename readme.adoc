@@ -9,6 +9,7 @@ artifacts like:
 - stateful session beans
 - singleton beans
 - message driven beans
+- scheduled methods
 - ...
 
 For more information on jQAssistant see https://www.jqassistant.org[^].

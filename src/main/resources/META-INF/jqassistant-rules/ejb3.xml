@@ -7,6 +7,7 @@
         <includeConcept refId="ejb3:SingletonBean"/>
         <includeConcept refId="ejb3:Local"/>
         <includeConcept refId="ejb3:Remote"/>
+        <includeConcept refId="ejb3:Schedule"/>
     </group>
 
     <concept id="ejb3:StatelessSessionBean">
@@ -66,6 +67,16 @@
             WHERE a.fqn="javax.ejb.Remote"
             SET t:Ejb:Remote
             RETURN t AS RemoteBean
+        ]]></cypher>
+    </concept>
+
+    <concept id="ejb3:Schedule">
+        <description>Labels all methods annotated with @javax.ejb.Schedule with "Schedule".</description>
+        <cypher><![CDATA[
+            MATCH (m:Method)-[:ANNOTATED_BY]->()-[:OF_TYPE]->(a:Type)
+            WHERE a.fqn="javax.ejb.Schedule"
+            SET m:Schedule
+            RETURN m AS ScheduledMethod
         ]]></cypher>
     </concept>
 

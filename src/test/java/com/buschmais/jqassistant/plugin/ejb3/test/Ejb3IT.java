@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.buschmais.jqassistant.core.analysis.api.Result;
 import com.buschmais.jqassistant.core.analysis.api.rule.RuleException;
 import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.MessageDrivenBean;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.ScheduledBean;
 import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.SingletonBean;
 import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.StatefulBean;
 import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.StatelessLocalBean;
@@ -13,6 +14,7 @@ import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
 import org.junit.Test;
 
+import static com.buschmais.jqassistant.plugin.java.test.matcher.MethodDescriptorMatcher.methodDescriptor;
 import static com.buschmais.jqassistant.plugin.java.test.matcher.TypeDescriptorMatcher.typeDescriptor;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -131,6 +133,21 @@ public class Ejb3IT extends AbstractJavaPluginIT {
                         hasItem(typeDescriptor(StatefulBean.class)), hasItem(typeDescriptor(MessageDrivenBean.class))));
         assertThat(query("MATCH (ejb:Type:Ejb:Local) RETURN ejb").getColumn("ejb"), hasItem(typeDescriptor(StatelessLocalBean.class)));
         assertThat(query("MATCH (ejb:Type:Ejb:Remote) RETURN ejb").getColumn("ejb"), hasItem(typeDescriptor(StatelessRemoteBean.class)));
+        store.commitTransaction();
+    }
+
+    /**
+     * Verifies the concept "ejb3:Schedule".
+     *
+     * @throws java.io.IOException
+     *             If the test fails.
+     */
+    @Test
+    public void scheduleMethod() throws Exception {
+        scanClasses(ScheduledBean.class);
+        assertThat(applyConcept("ejb3:Schedule").getStatus(), equalTo(Result.Status.SUCCESS));
+        store.beginTransaction();
+        assertThat(query("MATCH (timer:Method:Schedule) RETURN timer").getColumn("timer"), hasItem(methodDescriptor(ScheduledBean.class, "invokeTimer")));
         store.commitTransaction();
     }
 }

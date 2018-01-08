@@ -1,4 +1,6 @@
 ifndef::jqa-in-manual[== Version 1.4]
 ifdef::jqa-in-manual[== EJB 3 Plugin 1.4]
 
-TBW
+* New concept `ejb3:Schedule` which labels all Java methods
+  annotated with `@javax.ejb.Schedule` with the label
+  `Schedule`.

@@ -8,6 +8,7 @@
         <includeConcept refId="ejb3:Local"/>
         <includeConcept refId="ejb3:Remote"/>
         <includeConcept refId="ejb3:Schedule"/>
+        <includeConstraint refId="ejb3:ScheduleMethodInEjbContext"/>
     </group>
 
     <concept id="ejb3:StatelessSessionBean">
@@ -41,7 +42,8 @@
     </concept>
 
     <concept id="ejb3:MessageDrivenBean">
-        <description>Labels all types annotated with @javax.ejb.MessageDriven with "Ejb" and "MessageDriven".</description>
+        <description>Labels all types annotated with @javax.ejb.MessageDriven with "Ejb" and "MessageDriven".
+        </description>
         <cypher><![CDATA[
             MATCH (t:Type)-[:ANNOTATED_BY]->()-[:OF_TYPE]->(a:Type)
             WHERE a.fqn="javax.ejb.MessageDriven"
@@ -79,5 +81,18 @@
             RETURN m AS ScheduledMethod
         ]]></cypher>
     </concept>
+
+    <constraint id="ejb3:ScheduleMethodInEjbContext">
+        <requiresConcept refId="ejb3:StatelessSessionBean"/>
+        <requiresConcept refId="ejb3:StatefulSessionBean"/>
+        <requiresConcept refId="ejb3:SingletonBean"/>
+        <requiresConcept refId="ejb3:Schedule"/>
+        <description>Check that Schedule methods are only delared in EJB classes.</description>
+        <cypher><![CDATA[
+            MATCH (c:Class)-[:DECLARES]->(m:Method:Schedule)
+            WHERE NOT c:Ejb
+            RETURN c.fqn AS invalidBean, m.name AS scheduledMethodName
+        ]]></cypher>
+    </constraint>
 
 </jqa:jqassistant-rules>

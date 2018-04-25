@@ -167,7 +167,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
         assertThat(validateConstraint(ruleName).getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
 
-        final List<Result<Constraint>> constraintViolations = new ArrayList<>(reportWriter.getConstraintResults().values());
+        final List<Result<Constraint>> constraintViolations = new ArrayList<>(reportPlugin.getConstraintResults().values());
         assertThat("Unexpected number of violated constraints", constraintViolations.size(), equalTo(1));
         final Result<Constraint> result = constraintViolations.get(0);
         assertThat("Expected constraint " + ruleName, result, result(constraint(ruleName)));
@@ -190,7 +190,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
         assertThat(validateConstraint(ruleName).getStatus(), equalTo(FAILURE));
         store.beginTransaction();
 
-        final List<Result<Constraint>> constraintViolations = new ArrayList<>(reportWriter.getConstraintResults().values());
+        final List<Result<Constraint>> constraintViolations = new ArrayList<>(reportPlugin.getConstraintResults().values());
         assertThat("Unexpected number of violated constraints", constraintViolations.size(), equalTo(1));
         final Result<Constraint> result = constraintViolations.get(0);
         assertThat("Expected constraint " + ruleName, result, result(constraint(ruleName)));

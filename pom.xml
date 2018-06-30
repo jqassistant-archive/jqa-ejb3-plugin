@@ -138,8 +138,8 @@
             <groupId>com.buschmais.jqassistant.plugin</groupId>
             <artifactId>java</artifactId>
             <type>test-jar</type>
-            <version>${jqa-plugin-common.version}</version>
-			<scope>test</scope>
+            <version>${jqa-java-plugin.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>

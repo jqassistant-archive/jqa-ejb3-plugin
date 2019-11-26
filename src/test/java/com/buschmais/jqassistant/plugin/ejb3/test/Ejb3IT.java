@@ -5,21 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.buschmais.jqassistant.core.analysis.api.Result;
+import com.buschmais.jqassistant.core.report.api.model.Result;
 import com.buschmais.jqassistant.core.rule.api.model.Constraint;
 import com.buschmais.jqassistant.core.rule.api.model.RuleException;
-import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.*;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.MessageDrivenBean;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.ScheduledBean;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.ScheduledEJB;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.SingletonBean;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.StatefulBean;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.StatelessLocalBean;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.StatelessRemoteBean;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
 import org.junit.jupiter.api.Test;
 
-import static com.buschmais.jqassistant.core.analysis.api.Result.Status.FAILURE;
-import static com.buschmais.jqassistant.core.analysis.api.Result.Status.SUCCESS;
 import static com.buschmais.jqassistant.core.analysis.test.matcher.ConstraintMatcher.constraint;
 import static com.buschmais.jqassistant.core.analysis.test.matcher.ResultMatcher.result;
+import static com.buschmais.jqassistant.core.report.api.model.Result.Status.FAILURE;
+import static com.buschmais.jqassistant.core.report.api.model.Result.Status.SUCCESS;
 import static com.buschmais.jqassistant.plugin.java.test.matcher.MethodDescriptorMatcher.methodDescriptor;
 import static com.buschmais.jqassistant.plugin.java.test.matcher.TypeDescriptorMatcher.typeDescriptor;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 

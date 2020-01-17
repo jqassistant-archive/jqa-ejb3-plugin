@@ -1,6 +1,5 @@
 package com.buschmais.jqassistant.plugin.ejb3.test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,13 +7,7 @@ import java.util.Map;
 import com.buschmais.jqassistant.core.report.api.model.Result;
 import com.buschmais.jqassistant.core.rule.api.model.Constraint;
 import com.buschmais.jqassistant.core.rule.api.model.RuleException;
-import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.MessageDrivenBean;
-import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.ScheduledBean;
-import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.ScheduledEJB;
-import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.SingletonBean;
-import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.StatefulBean;
-import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.StatelessLocalBean;
-import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.StatelessRemoteBean;
+import com.buschmais.jqassistant.plugin.ejb3.test.set.beans.*;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
 import org.junit.jupiter.api.Test;
@@ -25,9 +18,9 @@ import static com.buschmais.jqassistant.core.report.api.model.Result.Status.FAIL
 import static com.buschmais.jqassistant.core.report.api.model.Result.Status.SUCCESS;
 import static com.buschmais.jqassistant.plugin.java.test.matcher.MethodDescriptorMatcher.methodDescriptor;
 import static com.buschmais.jqassistant.plugin.java.test.matcher.TypeDescriptorMatcher.typeDescriptor;
-import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
@@ -43,7 +36,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void statelessSessionBean() throws Exception {
+    public void statelessSessionBean() throws RuleException {
         scanClasses(StatelessLocalBean.class);
         assertThat(applyConcept("ejb3:StatelessSessionBean").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -58,7 +51,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void statefulSessionBean() throws Exception {
+    public void statefulSessionBean() throws RuleException {
         scanClasses(StatefulBean.class);
         assertThat(applyConcept("ejb3:StatefulSessionBean").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -88,7 +81,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void messageDrivenBean() throws Exception {
+    public void messageDrivenBean() throws RuleException {
         scanClasses(MessageDrivenBean.class);
         assertThat(applyConcept("ejb3:MessageDrivenBean").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -103,7 +96,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void localSessionBean() throws Exception {
+    public void localSessionBean() throws RuleException {
         scanClasses(StatelessLocalBean.class);
         assertThat(applyConcept("ejb3:Local").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -118,7 +111,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void remoteSessionBean() throws Exception {
+    public void remoteSessionBean() throws RuleException {
         scanClasses(StatelessRemoteBean.class);
         assertThat(applyConcept("ejb3:Remote").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -129,18 +122,14 @@ public class Ejb3IT extends AbstractJavaPluginIT {
     /**
      * Verifies the analysis group "ejb3:EnterpriseJavaBean".
      *
-     * @throws java.io.IOException
-     *             If the test fails.
      */
     @Test
-    public void enterpriseJavaBean() throws IOException, RuleException {
+    public void enterpriseJavaBean() throws RuleException {
         scanClasses(StatelessLocalBean.class, StatelessRemoteBean.class, StatefulBean.class, MessageDrivenBean.class);
         executeGroup("ejb3:EJB");
         store.beginTransaction();
-        assertThat(
-                query("MATCH (ejb:Type:Ejb) RETURN ejb").getColumn("ejb"),
-                allOf(hasItem(typeDescriptor(StatelessLocalBean.class)), hasItem(typeDescriptor(StatelessRemoteBean.class)),
-                        hasItem(typeDescriptor(StatefulBean.class)), hasItem(typeDescriptor(MessageDrivenBean.class))));
+        assertThat(query("MATCH (ejb:Type:Ejb) RETURN ejb").getColumn("ejb"), hasItems(typeDescriptor(StatelessLocalBean.class),
+                typeDescriptor(StatelessRemoteBean.class), typeDescriptor(StatefulBean.class), typeDescriptor(MessageDrivenBean.class)));
         assertThat(query("MATCH (ejb:Type:Ejb:Local) RETURN ejb").getColumn("ejb"), hasItem(typeDescriptor(StatelessLocalBean.class)));
         assertThat(query("MATCH (ejb:Type:Ejb:Remote) RETURN ejb").getColumn("ejb"), hasItem(typeDescriptor(StatelessRemoteBean.class)));
         store.commitTransaction();
@@ -153,7 +142,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void scheduleMethod() throws Exception {
+    public void scheduleMethod() throws RuleException, NoSuchMethodException {
         scanClasses(ScheduledBean.class);
         assertThat(applyConcept("ejb3:Schedule").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -162,14 +151,14 @@ public class Ejb3IT extends AbstractJavaPluginIT {
     }
 
     /**
-     * Verifies the constraint "ejb3:ScheduleMethodInEjbContext" results in
-     * no violations when applied to valid beans.
+     * Verifies the constraint "ejb3:ScheduleMethodInEjbContext" results in no
+     * violations when applied to valid beans.
      *
      * @throws java.io.IOException
      *             If the test fails.
      */
     @Test
-    public void scheduleMethodWithoutEjb_No_Violation() throws Exception {
+    public void scheduleMethodWithoutEjb_No_Violation() throws RuleException {
         scanClasses(ScheduledEJB.class);
         final String ruleName = "ejb3:ScheduleMethodInEjbContext";
         assertThat(validateConstraint(ruleName).getStatus(), equalTo(SUCCESS));
@@ -192,7 +181,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void scheduleMethodWithoutEjb() throws Exception {
+    public void scheduleMethodWithoutEjb() throws RuleException {
         scanClasses(ScheduledBean.class);
         final String ruleName = "ejb3:ScheduleMethodInEjbContext";
         assertThat(validateConstraint(ruleName).getStatus(), equalTo(FAILURE));

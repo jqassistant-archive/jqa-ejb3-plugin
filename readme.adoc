@@ -1,5 +1,7 @@
 = jQAssistant EJB 3 Plugin
 
+image::https://github.com/jQAssistant/jqa-ejb3-plugin/workflows/jQA%20Standard%20CI%20Build/badge.svg[jQA Standard CI Build]
+
 This is the EJB 3 Plugin of https://www.jqassistant.org[jQAssistant^].
 It enables jQAssistant to scan and to analyze EJB 3 related
 artifacts like:

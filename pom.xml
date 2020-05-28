@@ -21,8 +21,8 @@
     </description>
 
     <organization>
-        <name>buschmais GbR</name>
-        <url>http://www.buschmais.com</url>
+        <name>jQAssistant Development Team</name>
+        <url>https://jqassistant.org</url>
     </organization>
 
     <licenses>
@@ -37,8 +37,7 @@
         <developerConnection>scm:git:git@github.com:jqassistant/jqa-ejb3-plugin.git</developerConnection>
         <url>https://github.com/jqassistant/jqa-ejb3-plugin</url>
       <tag>HEAD</tag>
-  </scm>
-
+    </scm>
 
     <properties>
         <jqa-cdi-plugin.version>1.9.0-SNAPSHOT</jqa-cdi-plugin.version>

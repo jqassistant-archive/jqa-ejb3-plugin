@@ -43,6 +43,7 @@
         <jqa-cdi-plugin.version>1.9.0-SNAPSHOT</jqa-cdi-plugin.version>
         <jqa-java-plugin.version>1.9.0-SNAPSHOT</jqa-java-plugin.version>
         <jqa-plugin-common.version>1.9.0-SNAPSHOT</jqa-plugin-common.version>
+        <asciidoctor.toplevelid>ejb-plugin</asciidoctor.toplevelid>
     </properties>
 
     <build>

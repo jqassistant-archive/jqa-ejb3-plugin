@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.hasSize;
 /**
  * Tests for the EJB3 concepts.
  */
-public class Ejb3IT extends AbstractJavaPluginIT {
+class Ejb3IT extends AbstractJavaPluginIT {
 
     /**
      * Verifies the concept "ejb3:StatelessSessionBean".
@@ -66,7 +66,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void singletonBean() throws Exception {
+    void singletonBean() throws Exception {
         scanClasses(SingletonBean.class);
         assertThat(applyConcept("ejb3:SingletonBean").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -81,7 +81,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void messageDrivenBean() throws RuleException {
+    void messageDrivenBean() throws RuleException {
         scanClasses(MessageDrivenBean.class);
         assertThat(applyConcept("ejb3:MessageDrivenBean").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -96,7 +96,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void localSessionBean() throws RuleException {
+    void localSessionBean() throws RuleException {
         scanClasses(StatelessLocalBean.class);
         assertThat(applyConcept("ejb3:Local").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -111,7 +111,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void remoteSessionBean() throws RuleException {
+    void remoteSessionBean() throws RuleException {
         scanClasses(StatelessRemoteBean.class);
         assertThat(applyConcept("ejb3:Remote").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -124,7 +124,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *
      */
     @Test
-    public void enterpriseJavaBean() throws RuleException {
+    void enterpriseJavaBean() throws RuleException {
         scanClasses(StatelessLocalBean.class, StatelessRemoteBean.class, StatefulBean.class, MessageDrivenBean.class);
         executeGroup("ejb3:EJB");
         store.beginTransaction();
@@ -142,7 +142,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void scheduleMethod() throws RuleException, NoSuchMethodException {
+    void scheduleMethod() throws RuleException, NoSuchMethodException {
         scanClasses(ScheduledBean.class);
         assertThat(applyConcept("ejb3:Schedule").getStatus(), equalTo(SUCCESS));
         store.beginTransaction();
@@ -158,7 +158,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void scheduleMethodWithoutEjb_No_Violation() throws RuleException {
+    void scheduleMethodWithoutEjb_No_Violation() throws RuleException {
         scanClasses(ScheduledEJB.class);
         final String ruleName = "ejb3:ScheduleMethodInEjbContext";
         assertThat(validateConstraint(ruleName).getStatus(), equalTo(SUCCESS));
@@ -181,7 +181,7 @@ public class Ejb3IT extends AbstractJavaPluginIT {
      *             If the test fails.
      */
     @Test
-    public void scheduleMethodWithoutEjb() throws RuleException {
+    void scheduleMethodWithoutEjb() throws RuleException {
         scanClasses(ScheduledBean.class);
         final String ruleName = "ejb3:ScheduleMethodInEjbContext";
         assertThat(validateConstraint(ruleName).getStatus(), equalTo(FAILURE));

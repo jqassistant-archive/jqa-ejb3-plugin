@@ -1,6 +1,6 @@
 = jQAssistant EJB 3 Plugin
 
-This is the EJB 3 Plugin of https://www.jqassistant.org[jQAssistant^].
+This is the EJB 3 Plugin of https://jqassistant.org[jQAssistant^].
 It enables jQAssistant to scan and to analyze EJB 3 related
 artifacts like:
 
@@ -12,4 +12,4 @@ artifacts like:
 - scheduled methods
 - ...
 
-For more information on jQAssistant see https://www.jqassistant.org[^].
+For more information on jQAssistant see https://jqassistant.org[^].

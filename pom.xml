@@ -45,11 +45,6 @@
         <jqa-plugin-common.version>1.12.0-SNAPSHOT</jqa-plugin-common.version>
     </properties>
 
-    <build>
-        <plugins>
-        </plugins>
-    </build>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -90,6 +85,10 @@
         </dependency>
 
         <dependency>
+            <groupId>com.buschmais.jqassistant.core</groupId>
+            <artifactId>test</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.buschmais.jqassistant.plugin</groupId>
             <artifactId>common</artifactId>
             <version>${jqa-plugin-common.version}</version>
@@ -103,18 +102,6 @@
             <groupId>com.buschmais.jqassistant.plugin</groupId>
             <artifactId>cdi</artifactId>
             <version>${jqa-cdi-plugin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.buschmais.jqassistant.core</groupId>
-            <artifactId>analysis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.buschmais.jqassistant.core</groupId>
-            <artifactId>report</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.buschmais.jqassistant.core</groupId>
-            <artifactId>plugin</artifactId>
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.plugin</groupId>
